@@ -56,14 +56,14 @@ ARG WEB_URL
 ARG USER
 ARG HOME
 ENV ERL_DIST_PORT='3470' \
-    PIPE_DIR="/$HOME/run/pipe/" \
+    PIPE_DIR="$HOME/run/pipe/" \
     STUN_SERVICE='stun.conversations.im 3478'
 
 COPY --from=runtime / /
 
-WORKDIR /$HOME
+WORKDIR $HOME
 USER $USER
-VOLUME ["/$HOME"]
+VOLUME ["$HOME"]
 EXPOSE 3478 3478/udp
 
 HEALTHCHECK \
