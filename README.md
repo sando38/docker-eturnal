@@ -4,7 +4,7 @@ This variant includes the `acme.sh` script ([source](https://github.com/acmesh-o
 It works like the [standalone eturnal container image](https://github.com/processone/eturnal/tree/master/docker-k8s),
 but contains a cron job for creating/renewing TLS certificates.
 
-For available image have a look in the package [registry](https://github.com/sando38/docker-eturnal/pkgs/container/docker-eturnal).
+For available images have a look in the package [registry](https://github.com/sando38/docker-eturnal/pkgs/container/docker-eturnal).
 
 ## Configuration
 
@@ -18,8 +18,9 @@ It can be customized with the following environment variables.
 | `ACME_DOMAIN`  | only one domain supported  | `turn.example.com` |   |
 | `ACME_KEY_SIZE`  | [key lengths](https://github.com/acmesh-official/acme.sh#10-issue-ecc-certificates)  | `4096` |   |
 | `ACME_SH_UPGRADE`  | defines, whether the cron job also upgrades `acme.sh`  | `true` |  |
-| `ACME_CHALLENGE`  | either `http` (default) or `https`. | `http` | This must not interfere with the `LISTEN_TCP_TLS_PORT` (default: `3478`) |
 | `ACME_CRON_PERIOD`  | defines renewal interval  | `60d` |   |
+| `ACME_CHALLENGE`  | either `http` (default), `https` or `dns`. | `http` | When using `http` or `https` it must not interfere with the `LISTEN_TCP_TLS_PORT` (default: `3478`) |
+| `DNS_PROVIDER`  | only needed if `ACME_CHALLENGE=dns`, specifies the [DNS service](https://github.com/acmesh-official/acme.sh/wiki/dnsapi) to be used, e.g. `DNS_PROVIDER=dns_cf`  |  | the respective API keys, token, etc. must be defined as environment variables in the `docker run` cmd, e.g. `-e CF_Token="sdfsdfsdfljlbjkljlkjsdfoiwje" -e CF_Account_ID="xxxxxxxxxxxxx"`  |
 
 ### Listener options
 

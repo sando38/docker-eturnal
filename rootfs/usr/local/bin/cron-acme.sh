@@ -12,9 +12,15 @@ create_tls_certs()
         local domain="$2"
         local cert_dir="$3"
         local key_size="$4"
+        local dns_provider="${DNS_PROVIDER-}"
+
+        if [ "$acme_challenge" = 'dns' ]
+        then acme_sh=""$acme_sh" --issue --"$challenge" "$dns_provider""
+        else acme_sh=""$acme_sh" --issue --"$challenge""
+        fi
 
         echo "create/ renew certificates for domain $domain ..."
-        $acme_sh --issue --"$challenge" \
+        $acme_sh \
                 --keylength "$key_size" \
                 --always-force-new-domain-key \
                 -d $domain \
@@ -37,6 +43,8 @@ if [ "$acme_challenge" = 'http' ]
 then challenge='standalone'
 elif [ "$acme_challenge" = 'https' ]
 then challenge='alpn'
+elif [ "$acme_challenge" = 'dns' ]
+then challenge='dns'
 fi
 
 create_tls_certs "$email" "$domain" "$cert_dir"
