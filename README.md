@@ -15,7 +15,7 @@ It can be customized with the following environment variables.
 | Name  | Description  |  Default value | Additional notes  |
 | ------------ | ------------ | ------------ | ------------ |
 | `ACME_EMAIL`  | a valid email address  | `admin@example.com` |   |
-| `ACME_DOMAIN`  | only one domain supported  | `turn.example.com` |   |
+| `ACME_DOMAIN`  | domain(s) for the issued certificates  | `turn.example.com` | when using multiple domains, the please use the following syntax: `ACME_DOMAIN="turn.example.com -d turn2.example.com -d turn3.example.com"`  |
 | `ACME_KEY_SIZE`  | [key lengths](https://github.com/acmesh-official/acme.sh#10-issue-ecc-certificates)  | `4096` |   |
 | `ACME_SH_UPGRADE`  | defines, whether the cron job also upgrades `acme.sh`  | `true` |  |
 | `ACME_CRON_PERIOD`  | defines renewal interval  | `60d` |   |
@@ -67,7 +67,6 @@ Values specified in the `eturnal.yml` file prevail `ETURNAL_*` env. variables.
 
 * The image does currently **not** support running with the option `--read-only`.
 * No support for providing custom TLS certificates.
-* Only *one* `ACME_DOMAIN` can be defined.
 
 ## Examples
 

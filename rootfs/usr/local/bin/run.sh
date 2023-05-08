@@ -9,9 +9,9 @@ s6_cron='/etc/s6.d/cron/run'
 acme_sh="$(find $HOME -type f -executable -name acme.sh)"
 
 # Apply environment variables settings
-sed -i -e "s|<ACME_CRON_PERIOD>|\"${ACME_CRON_PERIOD:-60d}\"|g" "$s6_cron" \
-       -e "s|<ACME_DOMAIN>|\"${ACME_DOMAIN:-turn.exaple.com}\"|g" "$s6_cron" \
-       -e "s|<ACME_SH>|\"$acme_sh\"|g" "$s6_cron"
+sed -i -e "s|<ACME_CRON_PERIOD>|${ACME_CRON_PERIOD:-60d}|g" "$s6_cron" \
+       -e "s|<ACME_DOMAIN>|${ACME_DOMAIN:-turn.exaple.com}|g" "$s6_cron" \
+       -e "s|<ACME_SH>|$acme_sh|g" "$s6_cron"
 
 # Generate initial TLS certificatets
 cron-acme.sh
