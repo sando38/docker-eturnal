@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while true; do
+  sleep <ACME_CRON_PERIOD>
+  <ACME_SH> --renew -d <ACME_DOMAIN> --force
+done
