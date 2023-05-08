@@ -65,7 +65,6 @@ Values specified in the `eturnal.yml` file prevail `ETURNAL_*` env. variables.
 
 ### Limitations
 
-* The image does currently **not** support running with the option `--read-only`.
 * No support for providing custom TLS certificates.
 
 ## Examples
@@ -75,6 +74,7 @@ The image works with `docker` or `podman`.
 ```
 docker run -d --rm \
     --name eturnal \
+    --read-only \
     --cap-drop=ALL \
     --cap-add=NET_BIND_SERVICE \
     -p 80:80/udp \
@@ -97,6 +97,7 @@ Or consider using the host network instead (see also [here](https://github.com/p
 ```
 docker run -d --rm \
     --name eturnal \
+    --read-only \
     --cap-drop=ALL \
     --cap-add=NET_BIND_SERVICE \
     --network=host \
@@ -116,6 +117,7 @@ And an example with a custom `eturnal.yml` configuration file and `dns`:
 ```
 docker run -d --rm \
     --name eturnal \
+    --read-only \
     --cap-drop=ALL \
     --cap-add=NET_BIND_SERVICE \
     --network=host \

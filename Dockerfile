@@ -63,7 +63,7 @@ COPY --from=runtime / /
 
 WORKDIR $HOME
 USER $USER
-VOLUME ["$HOME"]
+VOLUME ["$HOME", "/etc/s6.d/", "/tmp"]
 EXPOSE 3478 3478/udp
 
 HEALTHCHECK \
