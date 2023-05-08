@@ -35,7 +35,7 @@ It can be customized with the following environment variables.
 
 | Name  | Description  |  Default value | Additional notes  |
 | ------------ | ------------ | ------------ | ------------ |
-| `MOD_STATS_PROMETHEUS`  | enable or disable the module  | `enabled` |  |
+| `MOD_STATS_PROMETHEUS_ENABLE`  | enable or disable the module  | `true` |  |
 | `MOD_STATS_PROMETHEUS_IP`  | More infos [here](https://eturnal.net/documentation/#mod_stats_prometheus)  | `any` |  |
 | `MOD_PROMETHEUS_PORT`  | see above  | `8081` |  |
 | `MOD_PROMETHEUS_TLS`  | see above  | `false` |  |

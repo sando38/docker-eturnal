@@ -18,7 +18,7 @@ cron-acme.sh
 
 # finalize minimal configuration file:
 ## enable `mod_stats_prometheus`
-if [ ${MOD_STATS_PROMETHEUS:-false} = 'true' ]
+if [ ${MOD_STATS_PROMETHEUS_ENABLE:-false} = 'true' ]
 then cat >> $HOME/etc/eturnal.yml <<-EOF
     mod_stats_prometheus:
       ip: ${MOD_STATS_PROMETHEUS_IP:-any}
