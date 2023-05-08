@@ -34,7 +34,7 @@ It can be customized with the following environment variables.
 | `ETURNAL_RELAY_MIN_PORT`  | More infos [here](https://eturnal.net/documentation/#relay_min_port)  | `49152` |  |
 | `ETURNAL_SECRET`  | More infos [here](https://eturnal.net/documentation/#secret)  |  | no default, auto-generated |
 
-### module `mod_stats_prometheus``
+### module `mod_stats_prometheus`
 
 | Name  | Description  |  Default value | Additional notes  |
 | ------------ | ------------ | ------------ | ------------ |
@@ -54,13 +54,20 @@ It can be customized with the following environment variables.
 | `STUN_SERVICE`  | External IP address lookup, more infos [here](https://github.com/processone/eturnal/tree/master/docker-k8s#general-hints))  | `stun.conversations.im 3478` | Set to `false` to disable, or us another STUN service |
 | `REALM`  | This option defines the [realm](https://eturnal.net/documentation/#realm)  | | no default |
 
+### Using a custom `eturnal.yml` configuration file
+
+Just mount your `eturnal.yml` configuration file into the running container at
+the following path:
+
+    -v /path/to/eturnal.yml:/etc/eturnal.yml
+
+Values specified in the `eturnal.yml` file prevail `ETURNAL_*` env. variables.
+
 ### Limitations
 
 * The image does currently **not** support running with the option `--read-only`.
-* No support for providing a custom `eturnal.yml` configuration file.
 * No support for providing custom TLS certificates.
 * Only *one* `ACME_DOMAIN` can be defined.
-* Only the two listeners (`udp` & `tcp`/`tls` in mode `auto`) are defined.
 
 ## Examples
 
@@ -102,5 +109,23 @@ docker run -d --rm \
     -e ACME_CHALLENGE=http \
     -e ACME_EMAIL=admin@example.com \
     -e ACME_DOMAIN=turn.example.com \
+  ghcr.io/sando38/docker-eturnal
+```
+
+And an example with a custom `eturnal.yml` configuration file and `dns`:
+
+```
+docker run -d --rm \
+    --name eturnal \
+    --cap-drop=ALL \
+    --cap-add=NET_BIND_SERVICE \
+    --network=host \
+    -e ACME_CHALLENGE=dns \
+    -e DNS_PROVIDER="dns_cf" \
+    -e CF_Token="sdfsdfsdfljlbjkljlkjsdfoiwje" \
+    -e CF_Account_ID="xxxxxxxxxxxxx" \
+    -e ACME_EMAIL=admin@example.com \
+    -e ACME_DOMAIN=turn.example.com \
+    -v /path/to/eturnal.yml:/etc/eturnal.yml \
   ghcr.io/sando38/docker-eturnal
 ```
