@@ -19,7 +19,7 @@ create_tls_certs()
         else acme_sh=""$acme_sh" --issue --"$challenge""
         fi
 
-        echo "create/ renew certificates for domain $domain ..."
+        echo "Create/ renew certificates for domain $domain ..."
         $acme_sh \
                 --keylength "$key_size" \
                 --always-force-new-domain-key \
@@ -29,7 +29,9 @@ create_tls_certs()
                 --ca-file $cert_dir/ca.pem \
                 --cert-file $cert_dir/crt.pem \
                 --fullchain-file $cert_dir/fullchain.pem \
-                --reloadcmd 'eturnalctl reload' \
+                --reloadcmd '[ ! -f "$HOME/.startup" ] \
+                        && eturnalctl reload \
+                        || echo "Startup phase, certificates generated!"' \
                 --force
 }
 #.

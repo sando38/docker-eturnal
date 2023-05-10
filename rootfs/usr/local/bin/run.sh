@@ -1,6 +1,25 @@
 #!/bin/sh
 
-# Install acme.sh script: https://github.com/acmesh-official/acme.sh
+set -e
+set -u
+
+myself=${0##*/}
+
+info()
+{
+	echo "$myself: $*"
+}
+
+error()
+{
+	echo >&2 "$myself: $*"
+}
+
+# Create file to check, whether the startup script still runs or not...
+startup_file="$HOME/.startup"
+touch "$startup_file"
+
+info 'Install acme.sh script: https://github.com/acmesh-official/acme.sh ...'
 wget -O -  https://get.acme.sh | sh -s \
        email=${ACME_EMAIL:-admin@example.com} \
        --no-cron
@@ -8,15 +27,15 @@ wget -O -  https://get.acme.sh | sh -s \
 s6_cron='/etc/s6.d/cron/run'
 acme_sh="$(find $HOME -type f -executable -name acme.sh)"
 
-# Apply environment variables settings
+info 'Apply environment variables settings ...'
 sed -i -e "s|<ACME_CRON_PERIOD>|${ACME_CRON_PERIOD:-60d}|g" "$s6_cron" \
        -e "s|<ACME_DOMAIN>|${ACME_DOMAIN:-turn.exaple.com}|g" "$s6_cron" \
        -e "s|<ACME_SH>|$acme_sh|g" "$s6_cron"
 
-# Generate initial TLS certificatets
+info 'Generate initial TLS certificatets ...'
 cron-acme.sh
 
-# finalize minimal configuration file:
+info 'Finalize minimal configuration file ...'
 ## enable `mod_stats_prometheus`
 if [ ${MOD_STATS_PROMETHEUS_ENABLE:-false} = 'true' ]
 then cat >> $HOME/etc/eturnal.yml <<-EOF
@@ -68,5 +87,8 @@ then cat >> $HOME/etc/eturnal.yml <<-EOF
 EOF
 fi
 
-# Run processes
+# Remove check file to indicate startup script has finished
+rm "$startup_file"
+
+info 'Start main processes ...'
 exec /bin/s6-svscan /etc/s6.d
