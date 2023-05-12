@@ -4,7 +4,7 @@ ARG UID='9000'
 ARG USER='eturnal'
 ARG HOME="/opt/$USER"
 ARG SOURCE_IMAGE='ghcr.io/sando38/eturnal'
-ARG VERSION='1.10.1-129'
+ARG VERSION='1.10.1-131'
 ARG WEB_URL='https://eturnal.net'
 
 ################################################################################
@@ -45,8 +45,6 @@ RUN apk del --repositories-file /dev/null \
     && find /lib/apk/db -type f -not -name 'installed' -delete
 
 COPY --chown=$UID:$UID rootfs /
-
-RUN chmod +x /usr/local/bin/* /etc/s6.d/*/* /etc/s6.d/.s6-svscan/*
 
 ################################################################################
 #' Build together production image
