@@ -19,6 +19,25 @@ error()
 startup_file="$HOME/.startup"
 touch "$startup_file"
 
+
+# read secrets defined as 'Docker secrets'
+secrets_variables='/tmp/variables'
+for i in $(env | grep '__FILE')
+do
+        var_name="$(echo "$i" | sed -e 's|__FILE=| |' | awk '{print $1}')"
+        var_file="$(echo "$i" | sed -e 's|__FILE=| |' | awk '{print $2}')"
+        echo "$var_name=$(cat $var_file)" >> "$secrets_variables"
+done
+
+if [ -f "$secrets_variables" ]
+then
+        set -a
+        source "$secrets_variables"
+        set +a
+        rm "$secrets_variables"
+fi
+
+
 info 'Install acme.sh script: https://github.com/acmesh-official/acme.sh ...'
 wget -O -  https://get.acme.sh | sh -s \
        email=${ACME_EMAIL:-admin@example.com} \

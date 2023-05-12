@@ -10,6 +10,17 @@ For available images have a look in the package [registry](https://github.com/sa
 
 It can be customized with the following environment variables.
 
+**Note:** All variables can also be defined as secrets with a `__FILE` suffix:
+
+```shell
+printf "secret" | podman secret create cf_token -
+podman run \
+  ... \
+  --secret cf_token \
+  -e CF_Token__FILE='/run/secrets/cf_token' \
+  ghcr.io/sando38/docker-eturnal
+```
+
 ### ACME options
 
 | Name  | Description  |  Default value | Additional notes  |
