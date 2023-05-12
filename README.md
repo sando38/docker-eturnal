@@ -75,6 +75,14 @@ the following path:
 
 Values specified in the `eturnal.yml` file prevail `ETURNAL_*` env. variables.
 
+**Hint:** If you use a custom `eturnal.yml` configuration file, TLS [cert](https://eturnal.net/documentation/#tls_crt_file)
+and [key](https://eturnal.net/documentation/#tls_key_file) must be:
+
+```yaml
+  tls_crt_file: /opt/eturnal/tls/fullchain.pem
+  tls_key_file: /opt/eturnal/tls/key.pem
+```
+
 ### Limitations
 
 * No support for providing custom TLS certificates.
