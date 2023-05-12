@@ -4,7 +4,7 @@ ARG UID='9000'
 ARG USER='eturnal'
 ARG HOME="/opt/$USER"
 ARG SOURCE_IMAGE='ghcr.io/sando38/eturnal'
-ARG VERSION='1.10.1-127'
+ARG VERSION='1.10.1-129'
 ARG WEB_URL='https://eturnal.net'
 
 ################################################################################
