@@ -29,6 +29,7 @@ podman run \
 | `ACME_DOMAIN`  | domain(s) for the issued certificates  | `turn.example.com` | when using multiple domains, the please use the following syntax: `ACME_DOMAIN="turn.example.com -d turn2.example.com -d turn3.example.com"`  |
 | `ACME_KEY_SIZE`  | [key lengths](https://github.com/acmesh-official/acme.sh#10-issue-ecc-certificates)  | `4096` |   |
 | `ACME_SH_UPGRADE`  | defines, whether the cron job also upgrades `acme.sh`  | `true` |  |
+| `ACME_CA`  | defines the [CA](https://github.com/acmesh-official/acme.sh/wiki/CA)  | `zerossl` |   |
 | `ACME_CRON_PERIOD`  | defines renewal interval  | `60d` |   |
 | `ACME_CHALLENGE`  | either `http` (default), `https` or `dns`. | `http` | When using `http` or `https` it must not interfere with the `LISTEN_TCP_TLS_PORT` (default: `3478`) |
 | `DNS_PROVIDER`  | only needed if `ACME_CHALLENGE=dns`, specifies the [DNS service](https://github.com/acmesh-official/acme.sh/wiki/dnsapi) to be used, e.g. `DNS_PROVIDER=dns_cf`  |  | the respective API keys, token, etc. must be defined as environment variables in the `docker run` cmd, e.g. `-e CF_Token="sdfsdfsdfljlbjkljlkjsdfoiwje" -e CF_Account_ID="xxxxxxxxxxxxx"`  |

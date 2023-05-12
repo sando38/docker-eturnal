@@ -5,6 +5,7 @@ domain="${ACME_DOMAIN:-turn.example.com}"
 cert_dir="$HOME/tls"
 key_size="${ACME_KEY_SIZE:-4096}"
 acme_sh="$HOME/.acme.sh/acme.sh"
+acme_ca="${ACME_CA:-zerossl}"
 
 create_tls_certs()
 {
@@ -24,7 +25,7 @@ create_tls_certs()
                 --keylength "$key_size" \
                 --always-force-new-domain-key \
                 -d $domain \
-                --server zerossl \
+                --server "$acme_ca" \
                 --key-file $cert_dir/key.pem \
                 --ca-file $cert_dir/ca.pem \
                 --cert-file $cert_dir/crt.pem \
