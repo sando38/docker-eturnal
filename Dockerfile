@@ -1,10 +1,10 @@
 #' Define default build variables
-ARG ALPINE_VSN='3.17'
+ARG ALPINE_VSN='3.18'
 ARG UID='9000'
 ARG USER='eturnal'
 ARG HOME="/opt/$USER"
 ARG SOURCE_IMAGE='ghcr.io/sando38/eturnal'
-ARG VERSION='1.10.1-131'
+ARG VERSION='1.10.1-108'
 ARG WEB_URL='https://eturnal.net'
 
 ################################################################################
