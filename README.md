@@ -1,3 +1,9 @@
+# This variant is no longer maintained as it is now available upstream.
+
+https://github.com/processone/eturnal/blob/master/doc/CONTAINER-ACME.md
+
+---
+
 # Inofficial [eturnal](https://eturnal.net) container image
 
 This variant includes the `acme.sh` script ([source](https://github.com/acmesh-official/acme.sh)).
